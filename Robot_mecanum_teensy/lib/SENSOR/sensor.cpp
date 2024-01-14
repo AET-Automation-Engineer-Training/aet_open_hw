@@ -52,6 +52,76 @@ void initRangeMessage(sensor_msgs::Range &range_name){
     range_name.max_range        = MAX_DISTANCE/100;
 }
 
+void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t sonar_right_right, uint8_t sonar_right_left, uint8_t sonar_left_right, uint8_t sonar_left_left, uint8_t sonar_back_right, uint8_t sonar_back_left){
+    uint8_t json_shaw = {
+        "sonar1": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar2": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar3": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar4": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar5": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar6": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar7": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        "sonar8": {
+            "radiation_type": sensor_msgs::Range::ULTRASOUND,
+            "frame_id" : frameid,
+            "field_of_view" : FIELD_OF_VIEW,
+            "min_range" : MIN_DISTANCE,
+            "max_range" : MAX_DISTANCE/100,
+            "range"     : 
+        },
+        
+    }
+}
+
 void setup_sensor(void){
     nh.advertise(pub_sonar_front_right);
     nh.advertise(pub_sonar_front_left);
