@@ -60,7 +60,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_front_right,
         },
         "sonar2": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -68,7 +68,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_front_left,
         },
         "sonar3": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -76,7 +76,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_right_right,
         },
         "sonar4": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -84,7 +84,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_right_left,
         },
         "sonar5": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -92,7 +92,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_left_right,
         },
         "sonar6": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -100,7 +100,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_left_left,
         },
         "sonar7": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -108,7 +108,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_back_right,
         },
         "sonar8": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -116,7 +116,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "field_of_view" : FIELD_OF_VIEW,
             "min_range" : MIN_DISTANCE,
             "max_range" : MAX_DISTANCE/100,
-            "range"     : 
+            "range"     : sonar_back_left,
         },
         
     }
