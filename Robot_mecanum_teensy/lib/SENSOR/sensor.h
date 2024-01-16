@@ -86,6 +86,8 @@ sensor_msgs::Range sonar_left_left;
 sensor_msgs::Range sonar_back_right;
 sensor_msgs::Range sonar_back_left;
 
+sensor_msgs::Range sonar_data[SONAR_NUM];
+
 std_msgs::String debug;
 
 ros::Publisher pub_sonar_front_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_front_right);
@@ -98,6 +100,8 @@ ros::Publisher pub_sonar_back_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_right);
 ros::Publisher pub_sonar_back_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_left);
 
 ros::Publisher pub_debug("/debug", &debug);
+
+ros::Publisher pub_sonar_data("/sonar_data", &sonar_data);
 
 void initRangeMessage(sensor_msgs::Range &range_name);
 
