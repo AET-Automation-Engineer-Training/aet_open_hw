@@ -16,7 +16,7 @@
 #include <std_msgs/String.h>
 #include <sensor_msgs/Range.h>
 #include <NewPing.h>
-#include "nlohmann/json.hpp"
+#include <stdint.h>
 
 
 /*******************************************************************************
