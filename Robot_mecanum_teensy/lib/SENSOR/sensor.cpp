@@ -31,14 +31,14 @@ NewPing sonars[SONAR_NUM] = {
 
 ros::NodeHandle nh;
 
-uint8_t sonar_front_right;
-uint8_t sonar_front_left;
-uint8_t sonar_right_right;
-uint8_t sonar_right_left;
-uint8_t sonar_left_right;
-uint8_t sonar_left_left;
-uint8_t sonar_back_right;
-uint8_t sonar_back_left;
+uint8_t front_right;
+uint8_t front_left;
+uint8_t right_right;
+uint8_t right_left;
+uint8_t left_right;
+uint8_t left_left;
+uint8_t back_right;
+uint8_t back_left;
 
 char frameid[] = "/sonar_ranger";
 
@@ -52,7 +52,7 @@ void initRangeMessage(sensor_msgs::Range &range_name){
     range_name.max_range        = MAX_DISTANCE/100;
 }
 
-void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t sonar_right_right, uint8_t sonar_right_left, uint8_t sonar_left_right, uint8_t sonar_left_left, uint8_t sonar_back_right, uint8_t sonar_back_left){
+void create_message(uint8_t front_right, uint8_t front_left, uint8_t ight_right, uint8_t right_left, uint8_t left_right, uint8_t left_left, uint8_t back_right, uint8_t back_left){
     uint8_t json_shaw = {
         "sonar1": {
             "radiation_type": sensor_msgs::Range::ULTRASOUND,
@@ -119,7 +119,7 @@ void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t
             "range"     : sonar_back_left,
         },
         
-    }
+    };
 }
 
 void setup_sensor(void){
@@ -144,19 +144,23 @@ void setup_sensor(void){
     pingTimer = millis();
 }
 
-void main_loop_sensor(void){
+void main_loop_sensor(void)
+{
+    setup_sensor();
     if(millis()>=pingTimer){
         // Read From sensors
-        sonar_front_right   = sonars[0].ping_cm(); 
-        sonar_front_left    = sonars[1].ping_cm(); 
-        sonar_right_right   = sonars[2].ping_cm(); 
-        sonar_right_left    = sonars[3].ping_cm(); 
-        sonar_left_right    = sonars[4].ping_cm();
-        sonar_left_left     = sonars[5].ping_cm();
-        sonar_back_right    = sonars[6].ping_cm();
-        sonar_back_left     = sonars[7].ping_cm();
-        String debug_msg    = "readings: sonar_front_right: "+String(sonar_front_right) + " sonar_front_left: "+String(sonar_front_left) + " sonar_right_right: "+String(sonar_right_right) + " sonar_right_left: "+String(sonar_right_left) + " sonar_left_right: "+String(sonar_left_right) + " sonar_left_left: "+String(sonar_left_left) + " sonar_back_right: "+String(sonar_back_right) + " sonar_back_left: "+String(sonar_back_left);
+        front_right   = sonars[0].ping_cm(); 
+        front_left    = sonars[1].ping_cm(); 
+        right_right   = sonars[2].ping_cm(); 
+        right_left    = sonars[3].ping_cm(); 
+        left_right    = sonars[4].ping_cm();
+        left_left     = sonars[5].ping_cm();
+        back_right    = sonars[6].ping_cm();
+        back_left     = sonars[7].ping_cm();
+        // String debug_msg    = "readings: sonar_front_right: "+String(sonar_front_right) + " sonar_front_left: "+String(sonar_front_left) + " sonar_right_right: "+String(sonar_right_right) + " sonar_right_left: "+String(sonar_right_left) + " sonar_left_right: "+String(sonar_left_right) + " sonar_left_left: "+String(sonar_left_left) + " sonar_back_right: "+String(sonar_back_right) + " sonar_back_left: "+String(sonar_back_left);
         
+        String debug_msg    = create_message();
+
         int length          = debug_msg.length();
         char data_final[length+1];
         debug_msg.toCharArray(data_final, length + 1);
@@ -196,4 +200,5 @@ void main_loop_sensor(void){
         pub_sonar_back_left.publish(&sonar_back_left);
 
         pingTimer = millis() + PING_INTERVAL;
+    }
 }

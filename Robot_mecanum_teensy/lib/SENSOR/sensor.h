@@ -16,6 +16,7 @@
 #include <std_msgs/String.h>
 #include <sensor_msgs/Range.h>
 #include <NewPing.h>
+#include "nlohmann/json.hpp"
 
 
 /*******************************************************************************
@@ -23,7 +24,7 @@
 *******************************************************************************/
 
 #define SONAR_NUM                   8
-#define PI                          3.1416
+// #define PI                          3.1416
 #define MIN_DISTANCE                0
 #define MAX_DISTANCE                200
 #define FIELD_OF_VIEW               0.26
@@ -86,7 +87,7 @@ sensor_msgs::Range sonar_left_left;
 sensor_msgs::Range sonar_back_right;
 sensor_msgs::Range sonar_back_left;
 
-sensor_msgs::Range sonar_data[SONAR_NUM];
+// sensor_msgs::Range sonars[SONAR_NUM];
 
 std_msgs::String debug;
 
@@ -101,9 +102,12 @@ ros::Publisher pub_sonar_back_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_left);
 
 ros::Publisher pub_debug("/debug", &debug);
 
-ros::Publisher pub_sonar_data("/sonar_data", &sonar_data);
+// ros::Publisher pub_sonar_data("/sonar_data", &sonars);
 
 void initRangeMessage(sensor_msgs::Range &range_name);
 
 void setup_sensor(void);
 void main_loop_sensor(void);
+void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t sonar_right_right, uint8_t sonar_right_left, uint8_t sonar_left_right, uint8_t sonar_left_left, uint8_t sonar_back_right, uint8_t sonar_back_left);
+
+#endif

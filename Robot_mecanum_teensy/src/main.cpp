@@ -1,18 +1,21 @@
 #include <Arduino.h>
+#include "sensor.h"
+#include "TeensyThreads.h"
 
 // put function declarations here:
-int myFunction(int, int);
+ros::NodeHandle nh;
+
 
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(9600);
+  nh.initNode();
+  nh.getHardware()->setBaud(57600);
+  threads.addThread(main_loop_sensor);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  threads.addThread(main_loop_sensor);
+  nh.spinOnce();
 }
