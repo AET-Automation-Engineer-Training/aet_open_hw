@@ -15,7 +15,8 @@
 #include "ros.h"
 #include <std_msgs/String.h>
 #include <sensor_msgs/Range.h>
-#include <NewPing.h>
+#include <Ultrasonic.h>
+#include <std_msgs/Int8.h>
 #include <stdint.h>
 
 
@@ -108,6 +109,9 @@ void initRangeMessage(sensor_msgs::Range &range_name);
 
 void setup_sensor(void);
 void main_loop_sensor(void);
-void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t sonar_right_right, uint8_t sonar_right_left, uint8_t sonar_left_right, uint8_t sonar_left_left, uint8_t sonar_back_right, uint8_t sonar_back_left);
+void create_message(uint8_t front_right, uint8_t front_left, 
+                    uint8_t right_right, uint8_t right_left, 
+                    uint8_t left_right, uint8_t left_left, 
+                    uint8_t back_right, uint8_t back_left);
 
 #endif

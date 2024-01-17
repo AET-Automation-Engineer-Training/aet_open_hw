@@ -10,23 +10,24 @@
 
 #include "sensor.h"
 
-NewPing sonars[SONAR_NUM] = {
+
+Ultrasonic sonars[SONAR_NUM] = {
     //sonar1
-    NewPing(TRIGGER_FRONT_RIGHT_SONAR, ECHO_FRONT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_FRONT_RIGHT_SONAR, ECHO_FRONT_RIGHT_SONAR),
     //sonar2
-    NewPing(TRIGGER_FRONT_LEFT_SONAR, ECHO_FRONT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_FRONT_LEFT_SONAR, ECHO_FRONT_LEFT_SONAR),
     //sonar3
-    NewPing(TRIGGER_RIGHT_RIGHT_SONAR, ECHO_RIGHT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_RIGHT_RIGHT_SONAR, ECHO_RIGHT_RIGHT_SONAR),
     //sonar4
-    NewPing(TRIGGER_RIGHT_LEFT_SONAR, ECHO_RIGHT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_RIGHT_LEFT_SONAR, ECHO_RIGHT_LEFT_SONAR),
     //sonar5
-    NewPing(TRIGGER_LEFT_RIGHT_SONAR, ECHO_LEFT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_LEFT_RIGHT_SONAR, ECHO_LEFT_RIGHT_SONAR),
     //sonar6
-    NewPing(TRIGGER_LEFT_LEFT_SONAR, ECHO_LEFT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_LEFT_LEFT_SONAR, ECHO_LEFT_LEFT_SONAR),
     //sonar7
-    NewPing(TRIGGER_BACK_RIGHT_SONAR, ECHO_BACK_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_BACK_RIGHT_SONAR, ECHO_BACK_RIGHT_SONAR),
     //sonar8
-    NewPing(TRIGGER_BACK_LEFT_SONAR, ECHO_BACK_LEFT_SONAR, MAX_DISTANCE)
+    Ultrasonic(TRIGGER_BACK_LEFT_SONAR, ECHO_BACK_LEFT_SONAR)
 };
 
 ros::NodeHandle nh;
@@ -51,76 +52,6 @@ void initRangeMessage(sensor_msgs::Range &range_name){
     range_name.min_range        = MIN_DISTANCE;
     range_name.max_range        = MAX_DISTANCE/100;
 }
-
-// void create_message(uint8_t front_right, uint8_t front_left, uint8_t ight_right, uint8_t right_left, uint8_t left_right, uint8_t left_left, uint8_t back_right, uint8_t back_left){
-//     uint8_t json_shaw = {
-//         "sonar1": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_front_right,
-//         },
-//         "sonar2": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_front_left,
-//         },
-//         "sonar3": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_right_right,
-//         },
-//         "sonar4": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_right_left,
-//         },
-//         "sonar5": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_left_right,
-//         },
-//         "sonar6": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_left_left,
-//         },
-//         "sonar7": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_back_right,
-//         },
-//         "sonar8": {
-//             "radiation_type": sensor_msgs::Range::ULTRASOUND,
-//             "frame_id" : frameid,
-//             "field_of_view" : FIELD_OF_VIEW,
-//             "min_range" : MIN_DISTANCE,
-//             "max_range" : MAX_DISTANCE/100,
-//             "range"     : sonar_back_left,
-//         },
-        
-//     };
-// }
 
 // TODO: Add timestamp 
 void create_message(uint8_t front_right, uint8_t front_left, 
@@ -149,30 +80,30 @@ void create_message(uint8_t front_right, uint8_t front_left,
     temp += "\"data\":";
     temp += "{";
     temp += "\"sonar_1:\"";
-    temp += String(sonar_front_right);
+    temp += String(front_right);
     temp += ",";
     temp += "\"sonar_2:\"";
-    temp += String(sonar_front_left);
+    temp += String(front_left);
     temp += ",";
     temp += "\"sonar_3:\"";
-    temp += String(sonar_right_right);
+    temp += String(right_right);
     temp += ",";
     temp += "\"sonar_4:\"";
-    temp += String(sonar_right_left);
+    temp += String(right_left);
     temp += ",";
     temp += "\"sonar_5:\"";
-    temp += String(sonar_left_right);
+    temp += String(left_right);
     temp += ",";
     temp += "\"sonar_6:\"";
-    temp += String(sonar_left_left);
+    temp += String(left_left);
     temp += ",";
     temp += "\"sonar_7:\"";
-    temp += String(sonar_back_right);
+    temp += String(back_right);
     temp += ",";
     temp += "\"sonar_8:\"";
-    temp += String(sonar_back_left);
+    temp += String(back_left);
     // End data object
-    temp += "}"
+    temp += "}";
     // End
     temp += "}";
 }
@@ -204,14 +135,14 @@ void main_loop_sensor(void)
     setup_sensor();
     if(millis()>=pingTimer){
         // Read From sensors
-        front_right   = sonars[0].ping_cm(); 
-        front_left    = sonars[1].ping_cm(); 
-        right_right   = sonars[2].ping_cm(); 
-        right_left    = sonars[3].ping_cm(); 
-        left_right    = sonars[4].ping_cm();
-        left_left     = sonars[5].ping_cm();
-        back_right    = sonars[6].ping_cm();
-        back_left     = sonars[7].ping_cm();
+        front_right   = sonars[0].read(); 
+        front_left    = sonars[1].read(); 
+        right_right   = sonars[2].read(); 
+        right_left    = sonars[3].read(); 
+        left_right    = sonars[4].read();
+        left_left     = sonars[5].read();
+        back_right    = sonars[6].read();
+        back_left     = sonars[7].read();
         String debug_msg    = "readings: sonar_front_right: "+String(front_right) + " sonar_front_left: "+String(front_left) + " sonar_right_right: "+String(right_right) + " sonar_right_left: "+String(right_left) + " sonar_left_right: "+String(left_right) + " sonar_left_left: "+String(left_left) + " sonar_back_right: "+String(back_right) + " sonar_back_left: "+String(back_left);
         
         // String debug_msg    = create_message();
