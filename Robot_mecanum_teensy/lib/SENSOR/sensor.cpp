@@ -122,6 +122,61 @@ void initRangeMessage(sensor_msgs::Range &range_name){
 //     };
 // }
 
+// TODO: Add timestamp 
+void create_message(uint8_t front_right, uint8_t front_left, 
+                    uint8_t right_right, uint8_t right_left, 
+                    uint8_t left_right, uint8_t left_left, 
+                    uint8_t back_right, uint8_t back_left)
+{
+    String temp = "{";
+    // Message header
+    temp += "\"Header\":";
+    temp += "{";
+    temp += "\"frame_id\":";
+    temp += frameid;
+    temp += ",";
+    temp += "\"field_of_view\":";
+    temp += String(FIELD_OF_VIEW);
+    temp += ",";
+    temp += "\"min_range\":";
+    temp += String(MIN_DISTANCE);
+    temp += ",";
+    temp += "\"max_range\":";
+    temp += String(MAX_DISTANCE/100);
+    // End header object
+    temp += "}";
+    // Sensor data
+    temp += "\"data\":";
+    temp += "{";
+    temp += "\"sonar_1:\"";
+    temp += String(sonar_front_right);
+    temp += ",";
+    temp += "\"sonar_2:\"";
+    temp += String(sonar_front_left);
+    temp += ",";
+    temp += "\"sonar_3:\"";
+    temp += String(sonar_right_right);
+    temp += ",";
+    temp += "\"sonar_4:\"";
+    temp += String(sonar_right_left);
+    temp += ",";
+    temp += "\"sonar_5:\"";
+    temp += String(sonar_left_right);
+    temp += ",";
+    temp += "\"sonar_6:\"";
+    temp += String(sonar_left_left);
+    temp += ",";
+    temp += "\"sonar_7:\"";
+    temp += String(sonar_back_right);
+    temp += ",";
+    temp += "\"sonar_8:\"";
+    temp += String(sonar_back_left);
+    // End data object
+    temp += "}"
+    // End
+    temp += "}";
+}
+
 void setup_sensor(void){
     nh.advertise(pub_sonar_front_right);
     nh.advertise(pub_sonar_front_left);
