@@ -64,15 +64,6 @@
 /*******************************************************************************
 * Topic names
 *******************************************************************************/
-
-#define TOPIC_SONAR_FRONT_RIGHT     "/sonar_front_right"
-#define TOPIC_SONAR_FRONT_LEFT      "/sonar_front_left"
-#define TOPIC_SONAR_RIGHT_RIGHT     "/sonar_right_right"
-#define TOPIC_SONAR_RIGHT_LEFT      "/sonar_right_left"
-#define TOPIC_SONAR_LEFT_RIGHT      "/sonar_left_right"
-#define TOPIC_SONAR_LEFT_LEFT       "/sonar_left_left"
-#define TOPIC_SONAR_BACK_RIGHT      "/sonar_back_right"
-#define TOPIC_SONAR_BACK_LEFT       "/sonar_back_left"
 #define TOPIC_SONAR_DATA            "/sonar_data"
 
 /*******************************************************************************
