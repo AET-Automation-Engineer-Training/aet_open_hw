@@ -47,6 +47,10 @@
 //Track the current action on the stepper
 int action = 0;
 
+float linearVelocityX;
+float linearVelocityY;
+float angularVelocityZ;
+
 //Function that is called once a message is published on the topic on which this Arduino is subscribed
 void trigger(const std_msgs::String &msg){
     String ms = msg.data;
@@ -64,7 +68,7 @@ AccelStepper motor_left_front   = AccelStepper(motorInterfaceType, step_pin_2, d
 AccelStepper motor_right_back   = AccelStepper(motorInterfaceType, step_pin_3, dir_pin_3);
 AccelStepper motor_left_back    = AccelStepper(motorInterfaceType, step_pin_4, dir_pin_4);
 
-ros::NodeHandle nh;
+
 
 
 void setup_motor(){
@@ -86,9 +90,27 @@ void setup_motor(){
     motor_left_back.setAcceleration(MAX_ACCELERATION);
 
     // cerate and initialize a ROS node on this Arduino controller
-    nh.initNode();
-    nh.subscribe(sub);
+    // nh.initNode();
+    // nh.subscribe(sub);
 }
+
+void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
+    linearVelocityX = cmd_vel_msg.linear.x;
+    linearVelocityY = cmd_vel_msg.linear.y;
+    angularVelocityZ = cmd_vel_msg.angular.z;
+
+    int wheel_front_left = (linearVelocityX - linearVelocityY - angularVelocityZ) * 100; 
+    int wheel_front_right = (linearVelocityX + linearVelocityY + angularVelocityZ) * 100; 
+    int wheel_rear_left = (linearVelocityX + linearVelocityY - angularVelocityZ) * 100; 
+    int wheel_rear_right = (linearVelocityX - linearVelocityY + angularVelocityZ) * 100; 
+
+    // Map wheel speeds to motors
+    motorFL.setSpeed(map(wheel_front_left, 100, -100, cytronMin, cytronMax));
+    motorRL.setSpeed(map(wheel_rear_left, 100, -100, cytronMin, cytronMax));
+    motorFR.setSpeed(map(wheel_front_right, 100, -100, cytronMin, cytronMax));
+    motorRR.setSpeed(map(wheel_rear_right, 100, -100, cytronMin, cytronMax));
+}
+
 void main_loop_motor(){
 
     // According to the last received message control the stepper
@@ -106,8 +128,8 @@ void main_loop_motor(){
     }
     
     // Keep ROS Node Up & Running
-    nh.spinOnce();
-}
+//     nh.spinOnce();
+// }
 
 
 // Omnidirectional wheels mouvements

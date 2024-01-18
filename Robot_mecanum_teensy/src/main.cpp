@@ -2,6 +2,7 @@
 #include "sensor.h"
 #include "TeensyThreads.h"
 #include <sensor_msgs/Range.h>
+#include "led.h"
 
 // put function declarations here:
 ros::NodeHandle nh;
@@ -19,6 +20,7 @@ void setup() {
   nh.initNode();
   nh.getHardware()->setBaud(57600);
   setup_sensor(nh);
+  
   nh.advertise(pub_sonar_data);
 }
 
@@ -27,6 +29,7 @@ void loop() {
   // threads.addThread(main_loop_sensor);
   // threads.yield();
   main_loop_sensor(pub_sonar_data);
+  main_led();
 
   nh.spinOnce();
 }
