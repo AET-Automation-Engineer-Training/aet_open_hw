@@ -73,45 +73,21 @@
 #define TOPIC_SONAR_LEFT_LEFT       "/sonar_left_left"
 #define TOPIC_SONAR_BACK_RIGHT      "/sonar_back_right"
 #define TOPIC_SONAR_BACK_LEFT       "/sonar_back_left"
+#define TOPIC_SONAR_DATA            "/sonar_data"
 
-ros::NodeHandle nh;
 /*******************************************************************************
 * Publisher
 *******************************************************************************/
 
-sensor_msgs::Range sonar_front_right;
-sensor_msgs::Range sonar_front_left;
-sensor_msgs::Range sonar_right_right;
-sensor_msgs::Range sonar_right_left;
-sensor_msgs::Range sonar_left_right;
-sensor_msgs::Range sonar_left_left;
-sensor_msgs::Range sonar_back_right;
-sensor_msgs::Range sonar_back_left;
+void setup_sensor(ros::NodeHandle &nh);
 
-// sensor_msgs::Range sonars[SONAR_NUM];
+void main_loop_sensor(ros::Publisher &pub_sonar_data);
 
-std_msgs::String debug;
-
-ros::Publisher pub_sonar_front_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_front_right);
-ros::Publisher pub_sonar_front_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_front_left);
-ros::Publisher pub_sonar_right_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_right_right);
-ros::Publisher pub_sonar_right_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_right_left);
-ros::Publisher pub_sonar_left_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_left_right);
-ros::Publisher pub_sonar_left_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_left_left);
-ros::Publisher pub_sonar_back_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_right);
-ros::Publisher pub_sonar_back_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_left);
-
-ros::Publisher pub_debug("/debug", &debug);
-
-// ros::Publisher pub_sonar_data("/sonar_data", &sonars);
-
-void initRangeMessage(sensor_msgs::Range &range_name);
-
-void setup_sensor(void);
-void main_loop_sensor(void);
-void create_message(uint8_t front_right, uint8_t front_left, 
+String create_message(uint8_t front_right, uint8_t front_left, 
                     uint8_t right_right, uint8_t right_left, 
                     uint8_t left_right, uint8_t left_left, 
                     uint8_t back_right, uint8_t back_left);
 
 #endif
+
+

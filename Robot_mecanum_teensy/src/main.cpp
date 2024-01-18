@@ -4,7 +4,13 @@
 #include <sensor_msgs/Range.h>
 
 // put function declarations here:
-// ros::NodeHandle nh;
+ros::NodeHandle nh;
+
+std_msgs::String debug;
+
+ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
+
+ros::Publisher pub_debug("/debug", &debug);
 
 
 void setup() {
@@ -12,15 +18,15 @@ void setup() {
   Serial.begin(9600);
   nh.initNode();
   nh.getHardware()->setBaud(57600);
-  // threads.addThread(setup_sensor);
-  // setup_sensor();
+  setup_sensor(nh);
+  nh.advertise(pub_sonar_data);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   // threads.addThread(main_loop_sensor);
   // threads.yield();
-  // main_loop_sensor();
+  main_loop_sensor(pub_sonar_data);
 
   nh.spinOnce();
 }
