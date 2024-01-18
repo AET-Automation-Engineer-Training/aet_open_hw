@@ -74,7 +74,7 @@
 #define TOPIC_SONAR_BACK_RIGHT      "/sonar_back_right"
 #define TOPIC_SONAR_BACK_LEFT       "/sonar_back_left"
 
-
+ros::NodeHandle nh;
 /*******************************************************************************
 * Publisher
 *******************************************************************************/

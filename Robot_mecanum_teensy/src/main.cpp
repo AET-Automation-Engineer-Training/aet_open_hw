@@ -1,11 +1,10 @@
 #include <Arduino.h>
 #include "sensor.h"
 #include "TeensyThreads.h"
-#include "ros.h"
 #include <sensor_msgs/Range.h>
 
 // put function declarations here:
-ros::NodeHandle nh;
+// ros::NodeHandle nh;
 
 
 void setup() {
@@ -13,7 +12,8 @@ void setup() {
   Serial.begin(9600);
   nh.initNode();
   nh.getHardware()->setBaud(57600);
-  // threads.addThread(main_loop_sensor);
+  // threads.addThread(setup_sensor);
+  // setup_sensor();
 }
 
 void loop() {
@@ -21,5 +21,6 @@ void loop() {
   // threads.addThread(main_loop_sensor);
   // threads.yield();
   // main_loop_sensor();
+
   nh.spinOnce();
 }

@@ -30,7 +30,7 @@ Ultrasonic sonars[SONAR_NUM] = {
     Ultrasonic(TRIGGER_BACK_LEFT_SONAR, ECHO_BACK_LEFT_SONAR)
 };
 
-ros::NodeHandle nh;
+
 
 uint8_t front_right;
 uint8_t front_left;
@@ -132,7 +132,7 @@ void setup_sensor(void){
 
 void main_loop_sensor(void)
 {
-    setup_sensor();
+    // setup_sensor();
     if(millis()>=pingTimer){
         // Read From sensors
         front_right   = sonars[0].read(); 
@@ -145,7 +145,7 @@ void main_loop_sensor(void)
         back_left     = sonars[7].read();
         String debug_msg    = "readings: sonar_front_right: "+String(front_right) + " sonar_front_left: "+String(front_left) + " sonar_right_right: "+String(right_right) + " sonar_right_left: "+String(right_left) + " sonar_left_right: "+String(left_right) + " sonar_left_left: "+String(left_left) + " sonar_back_right: "+String(back_right) + " sonar_back_left: "+String(back_left);
         
-        // String debug_msg    = create_message();
+        // uint32_t debug_msg    = create_message(front_right, front_left, right_right, right_left, left_right, left_left, back_right, back_left);
 
         int length          = debug_msg.length();
         char data_final[length+1];
