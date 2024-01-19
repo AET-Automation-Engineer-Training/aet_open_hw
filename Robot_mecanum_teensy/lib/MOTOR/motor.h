@@ -45,9 +45,9 @@
 #define FRONT_LEFT                          2
 #define FRONT_RIGHT                         3
 
-#define LINEAR_X                            0
-#define MAX_LINEAR_VELOCITY                 1
-#define ANGULAR_Z                           5
+// #define LINEAR_X                            0
+// #define MAX_LINEAR_VELOCITY                 1
+// #define ANGULAR_Z                           5
 
 #define DEG2RAD(x)                          (x * 0.01745329252)  // *PI/180
 #define RAD2DEG(x)                          (x * 57.2957795131)  // *180/PI

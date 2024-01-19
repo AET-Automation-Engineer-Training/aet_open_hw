@@ -66,10 +66,10 @@ double angularVelocityZ;
 // }
 
 // Create an instance of the class AccelStepper for each stepper motor connected to the Arduino board
-AccelStepper motor_right_front  = AccelStepper(motorInterfaceType, step_pin_1, dir_pin_1);
-AccelStepper motor_left_front   = AccelStepper(motorInterfaceType, step_pin_2, dir_pin_2);
-AccelStepper motor_right_back   = AccelStepper(motorInterfaceType, step_pin_3, dir_pin_3);
-AccelStepper motor_left_back    = AccelStepper(motorInterfaceType, step_pin_4, dir_pin_4);
+// AccelStepper motor_right_front  = AccelStepper(motorInterfaceType, step_pin_1, dir_pin_1);
+// AccelStepper motor_left_front   = AccelStepper(motorInterfaceType, step_pin_2, dir_pin_2);
+// AccelStepper motor_right_back   = AccelStepper(motorInterfaceType, step_pin_3, dir_pin_3);
+// AccelStepper motor_left_back    = AccelStepper(motorInterfaceType, step_pin_4, dir_pin_4);
 
 Stepper motor_right_front_1(STEP_PER_REVOLUTION, step_pin_1, dir_pin_1);
 Stepper motor_left_front_1(STEP_PER_REVOLUTION,  step_pin_2, dir_pin_2);
@@ -84,10 +84,10 @@ void setup_motor(){
     digitalWrite(enable_shield, LOW);
   
     // Set the maximum speed 
-    motor_right_front.setMaxSpeed(MAX_SPEED);
-    motor_left_front.setMaxSpeed(MAX_SPEED);
-    motor_right_back.setMaxSpeed(MAX_SPEED);
-    motor_left_back.setMaxSpeed(MAX_SPEED);
+    // motor_right_front.setMaxSpeed(MAX_SPEED);
+    // motor_left_front.setMaxSpeed(MAX_SPEED);
+    // motor_right_back.setMaxSpeed(MAX_SPEED);
+    // motor_left_back.setMaxSpeed(MAX_SPEED);
 
     /* Step lib */
     motor_right_front_1.setSpeed(MAX_SPEED);
@@ -96,10 +96,10 @@ void setup_motor(){
     motor_left_back_1.setSpeed(MAX_SPEED); 
 
     // Set the maximum acceleration
-    motor_right_front.setAcceleration(MAX_ACCELERATION);
-    motor_left_front.setAcceleration(MAX_ACCELERATION);
-    motor_right_back.setAcceleration(MAX_ACCELERATION);
-    motor_left_back.setAcceleration(MAX_ACCELERATION);
+    // motor_right_front.setAcceleration(MAX_ACCELERATION);
+    // motor_left_front.setAcceleration(MAX_ACCELERATION);
+    // motor_right_back.setAcceleration(MAX_ACCELERATION);
+    // motor_left_back.setAcceleration(MAX_ACCELERATION);
 
     // cerate and initialize a ROS node on this Arduino controller
     // nh.initNode();
@@ -107,20 +107,20 @@ void setup_motor(){
 }
 
 void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
-    linearVelocityX         = cmd_vel_msg.linear.x;
-    linearVelocityY         = cmd_vel_msg.linear.y;
-    angularVelocityZ        = cmd_vel_msg.angular.z;
+    // linearVelocityX         = cmd_vel_msg.linear.x;
+    // linearVelocityY         = cmd_vel_msg.linear.y;
+    // angularVelocityZ        = cmd_vel_msg.angular.z;
 
-    int wheel_front_left    = (linearVelocityX - linearVelocityY - angularVelocityZ) * 100; 
-    int wheel_front_right   = (linearVelocityX + linearVelocityY + angularVelocityZ) * 100; 
-    int wheel_rear_left     = (linearVelocityX + linearVelocityY - angularVelocityZ) * 100; 
-    int wheel_rear_right    = (linearVelocityX - linearVelocityY + angularVelocityZ) * 100; 
+    // int wheel_front_left    = (linearVelocityX - linearVelocityY - angularVelocityZ) * 100; 
+    // int wheel_front_right   = (linearVelocityX + linearVelocityY + angularVelocityZ) * 100; 
+    // int wheel_rear_left     = (linearVelocityX + linearVelocityY - angularVelocityZ) * 100; 
+    // int wheel_rear_right    = (linearVelocityX - linearVelocityY + angularVelocityZ) * 100; 
 
-    // Map wheel speeds to motors
-    motor_left_front.setSpeed(map(wheel_front_left, -100, 100, -MAX_SPEED, MAX_SPEED));
-    motor_left_back.setSpeed(map(wheel_rear_left, -100, 100, -MAX_SPEED, MAX_SPEED));
-    motor_right_front.setSpeed(map(wheel_front_right, -100, 100, -MAX_SPEED, MAX_SPEED));
-    motor_right_back.setSpeed(map(wheel_rear_right, -100, 100, -MAX_SPEED, MAX_SPEED));
+    // // Map wheel speeds to motors
+    // motor_left_front.setSpeed(map(wheel_front_left, -100, 100, -MAX_SPEED, MAX_SPEED));
+    // motor_left_back.setSpeed(map(wheel_rear_left, -100, 100, -MAX_SPEED, MAX_SPEED));
+    // motor_right_front.setSpeed(map(wheel_front_right, -100, 100, -MAX_SPEED, MAX_SPEED));
+    // motor_right_back.setSpeed(map(wheel_rear_right, -100, 100, -MAX_SPEED, MAX_SPEED));
 
 
     /* Step lib */
@@ -138,10 +138,10 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     double wheel_rear_left_step         = wheel_rear_left_1    * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);  
     double wheel_rear_right_step        = wheel_rear_right_1   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);  
 
-    double wheel_front_left_mps         = (wheel_front_left_mps  * 0.0314) * WHEEL_RADIUS;
-    double wheel_front_right_mps        = (wheel_front_right_mps * 0.0314) * WHEEL_RADIUS;
-    double wheel_rear_left_mps          = (wheel_rear_left_mps   * 0.0314) * WHEEL_RADIUS;
-    double wheel_rear_right_mps         = (wheel_rear_right_mps  * 0.0314) * WHEEL_RADIUS;
+    double wheel_front_left_mps         = (wheel_front_left_step  * 0.0314) * WHEEL_RADIUS;
+    double wheel_front_right_mps        = (wheel_front_right_step * 0.0314) * WHEEL_RADIUS;
+    double wheel_rear_left_mps          = (wheel_rear_left_step   * 0.0314) * WHEEL_RADIUS;
+    double wheel_rear_right_mps         = (wheel_rear_right_step  * 0.0314) * WHEEL_RADIUS;
 
     motor_right_front_1.step(wheel_front_left_step);
     motor_left_front_1.step(wheel_front_right_step);
