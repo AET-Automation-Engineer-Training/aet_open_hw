@@ -25,6 +25,9 @@
 #define WHEEL_RADIUS                        0.03
 #define WHEEL_SEPARATION_X                  0.1005           // meter 
 #define WHEEL_SEPARATION_Y                  0.085            // meter 
+
+#define WHEEL_GEOMETRY                      (WHEEL_SEPARATION_X + WHEEL_SEPARATION_Y)
+
 #define TURNING_RADIUS                      0.080            // meter 
 #define ROBOT_RADIUS                        0.105            // meter 
 #define ENCODER_MIN                         -2147483648      // raw
@@ -36,7 +39,7 @@
 #define MIN_LINEAR_VELOCITY                 -MAX_LINEAR_VELOCITY  
 #define MIN_ANGULAR_VELOCITY                -MAX_ANGULAR_VELOCITY 
 
-#define WHELL_NUM                           4
+#define WHEEL_NUM                           4
 #define REAR_LEFT                           0
 #define REAR_RIGHT                          1
 #define FRONT_LEFT                          2
