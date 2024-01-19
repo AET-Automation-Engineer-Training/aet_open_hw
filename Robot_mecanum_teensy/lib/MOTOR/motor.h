@@ -65,17 +65,17 @@ void updateMotorInfo(int32_t left_rear_tick, int32_t right_rear_tick, int32_t le
 void updateOdometry(void);
 void updateGoalVelocity(void);
 bool calcOdometry(double diff_time);
-void trigger(const std_msgs::String& msg);
-void goForward(int velocity);
-void goBackward(int velocity);
-void goRight(int velocity);
-void goLeft(int velocity);
-void goForwardRight(int velocity);
-void goForwardLet(int velocity);
-void goBackwardRight(int velocity);
-void goBackwardLeft(int velocity);
-void moveRobotTo(int steps_1, int steps_2, int steps_3, int steps_4);
-void stopRobot(void);
+// void trigger(const std_msgs::String& msg);
+// void goForward(int velocity);
+// void goBackward(int velocity);
+// void goRight(int velocity);
+// void goLeft(int velocity);
+// void goForwardRight(int velocity);
+// void goForwardLet(int velocity);
+// void goBackwardRight(int velocity);
+// void goBackwardLeft(int velocity);
+// void moveRobotTo(int steps_1, int steps_2, int steps_3, int steps_4);
+// void stopRobot(void);
 
 void setup_motor(void);
 void main_loop_motor(void);
@@ -84,8 +84,7 @@ void main_loop_motor(void);
 /*******************************************************************************
 * Subscriber
 *******************************************************************************/
-ros::Subscriber<geometry_msgs::Twist> cmd_vel_sub("cmd_vel", commandVelocityCallback);
-ros::Subscriber<std_msgs::String> sub("/stepper_trigger", trigger);
+// ros::Subscriber<std_msgs::String> sub("/stepper_trigger", trigger);
 
 /*******************************************************************************
 * Publisher
