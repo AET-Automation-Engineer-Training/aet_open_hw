@@ -44,6 +44,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   main_loop_sensor(pub_sonar_data);
+  threads.delay(100);
   main_led();
 
   nh.spinOnce();
