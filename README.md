@@ -1,7 +1,25 @@
 # ate_open_hw
-## Build firmware for Teensy:
+## Hardware:
+- Teensy 4.1
+- Step Motor
+- Sonar
+- Led
+## Software:
+- Arduino platformio and C++
+## Feature:
+- Control 4-wheel mecanum
+- Read sensor and publisher for Jetson
+- Control step motor and subscriber for Jetson
+## Programs and Build firmware for Teensy:
 1. Install platformio on vscode
-2. Click (v) for building code. 
+![markdown](image-2.png)
+2. Create project with platformio
+![markdown](image-3.png)
+3. Create libs: sensor, motor, led.
+![markdown](image-4.png)
+4. Note: implement the publisher and subcriber in main.cpp. Don't do not this in the main of libs.  
+5. Click (v) for building code. 
 ![markdown](image.png)
-3. Results:
+6. Results:
 ![markdown](image-1.png)
+
