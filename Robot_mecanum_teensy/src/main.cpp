@@ -12,8 +12,8 @@ std_msgs::String debug;
 
 ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
 
-// geometry_msgs::Twist cmd_vel_msg;
-// ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("cmd_vel", &commandVelocityCallback);
+/* Debugging motor */
+ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("cmd_vel", &commandVelocityCallback);
 
 ros::Publisher pub_debug("/debug", &debug);
 
@@ -24,18 +24,22 @@ void setup() {
   nh.initNode();
   nh.getHardware()->setBaud(57600);
   setup_sensor(nh);
-  // setup_motor();
+  
+  /* Debugging motor */
+  setup_motor();
   
   nh.advertise(pub_sonar_data);
+  nh.subscribe(sub_cmd_vel);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  // threads.addThread(main_loop_sensor);
-  // threads.yield();
+  
+  /* Debugging motor */
+  main_loop_motor();
+
   main_loop_sensor(pub_sonar_data);
   main_led();
-  // main_loop_motor();
 
   nh.spinOnce();
 }
