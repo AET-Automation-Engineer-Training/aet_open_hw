@@ -3,6 +3,7 @@
 #include "motor.h"
 #include "TeensyThreads.h"
 #include <sensor_msgs/Range.h>
+#include "std_msgs/Float32.h"
 #include "led.h"
 
 // put function declarations here:
@@ -46,6 +47,8 @@ void loop() {
   main_loop_sensor(pub_sonar_data);
   threads.delay(100);
   main_led();
+
+  threads.yield();
 
   nh.spinOnce();
 }
