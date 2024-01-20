@@ -15,7 +15,9 @@
 #include "ros.h"
 #include <std_msgs/String.h>
 #include <sensor_msgs/Range.h>
-#include <NewPing.h>
+#include <Ultrasonic.h>
+#include <std_msgs/Int8.h>
+#include <stdint.h>
 
 
 /*******************************************************************************
@@ -23,7 +25,7 @@
 *******************************************************************************/
 
 #define SONAR_NUM                   8
-#define PI                          3.1416
+// #define PI                          3.1416
 #define MIN_DISTANCE                0
 #define MAX_DISTANCE                200
 #define FIELD_OF_VIEW               0.26
@@ -62,48 +64,21 @@
 /*******************************************************************************
 * Topic names
 *******************************************************************************/
-
-#define TOPIC_SONAR_FRONT_RIGHT     "/sonar_front_right"
-#define TOPIC_SONAR_FRONT_LEFT      "/sonar_front_left"
-#define TOPIC_SONAR_RIGHT_RIGHT     "/sonar_right_right"
-#define TOPIC_SONAR_RIGHT_LEFT      "/sonar_right_left"
-#define TOPIC_SONAR_LEFT_RIGHT      "/sonar_left_right"
-#define TOPIC_SONAR_LEFT_LEFT       "/sonar_left_left"
-#define TOPIC_SONAR_BACK_RIGHT      "/sonar_back_right"
-#define TOPIC_SONAR_BACK_LEFT       "/sonar_back_left"
-
+#define TOPIC_SONAR_DATA            "/sonar_data"
 
 /*******************************************************************************
 * Publisher
 *******************************************************************************/
 
-sensor_msgs::Range sonar_front_right;
-sensor_msgs::Range sonar_front_left;
-sensor_msgs::Range sonar_right_right;
-sensor_msgs::Range sonar_right_left;
-sensor_msgs::Range sonar_left_right;
-sensor_msgs::Range sonar_left_left;
-sensor_msgs::Range sonar_back_right;
-sensor_msgs::Range sonar_back_left;
+void setup_sensor(ros::NodeHandle &nh);
 
-sensor_msgs::Range sonar_data[SONAR_NUM];
+void main_loop_sensor(ros::Publisher &pub_sonar_data);
 
-std_msgs::String debug;
+String create_message(uint8_t front_right, uint8_t front_left, 
+                    uint8_t right_right, uint8_t right_left, 
+                    uint8_t left_right, uint8_t left_left, 
+                    uint8_t back_right, uint8_t back_left);
 
-ros::Publisher pub_sonar_front_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_front_right);
-ros::Publisher pub_sonar_front_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_front_left);
-ros::Publisher pub_sonar_right_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_right_right);
-ros::Publisher pub_sonar_right_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_right_left);
-ros::Publisher pub_sonar_left_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_left_right);
-ros::Publisher pub_sonar_left_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_left_left);
-ros::Publisher pub_sonar_back_right(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_right);
-ros::Publisher pub_sonar_back_left(TOPIC_SONAR_FRONT_RIGHT, &sonar_back_left);
+#endif
 
-ros::Publisher pub_debug("/debug", &debug);
 
-ros::Publisher pub_sonar_data("/sonar_data", &sonar_data);
-
-void initRangeMessage(sensor_msgs::Range &range_name);
-
-void setup_sensor(void);
-void main_loop_sensor(void);

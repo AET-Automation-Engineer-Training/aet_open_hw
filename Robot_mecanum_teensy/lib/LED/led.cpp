@@ -11,8 +11,10 @@
 #include "led.h"
 #include <Arduino.h>
 
+uint8_t j_in_state = 0;
 
-ADAFRUIT_NEOPIXEL_H pixels(NUMPIXELS, LED_RGB_PIN, NEO_GRB + NEO_KHZ800);
+
+Adafruit_NeoPixel pixels(NUMPIXELS, LED_RGB_PIN, NEO_GRB + NEO_KHZ800);
 
 void main_led(void)
 {

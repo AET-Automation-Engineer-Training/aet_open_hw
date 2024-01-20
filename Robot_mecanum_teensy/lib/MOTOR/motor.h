@@ -25,6 +25,9 @@
 #define WHEEL_RADIUS                        0.03
 #define WHEEL_SEPARATION_X                  0.1005           // meter 
 #define WHEEL_SEPARATION_Y                  0.085            // meter 
+
+#define WHEEL_GEOMETRY                      (WHEEL_SEPARATION_X + WHEEL_SEPARATION_Y)
+
 #define TURNING_RADIUS                      0.080            // meter 
 #define ROBOT_RADIUS                        0.105            // meter 
 #define ENCODER_MIN                         -2147483648      // raw
@@ -36,15 +39,15 @@
 #define MIN_LINEAR_VELOCITY                 -MAX_LINEAR_VELOCITY  
 #define MIN_ANGULAR_VELOCITY                -MAX_ANGULAR_VELOCITY 
 
-#define WHELL_NUM                           4
+#define WHEEL_NUM                           4
 #define REAR_LEFT                           0
 #define REAR_RIGHT                          1
 #define FRONT_LEFT                          2
 #define FRONT_RIGHT                         3
 
-#define LINEAR_X                            0
-#define MAX_LINEAR_VELOCITY                 1
-#define ANGULAR_Z                           5
+// #define LINEAR_X                            0
+// #define MAX_LINEAR_VELOCITY                 1
+// #define ANGULAR_Z                           5
 
 #define DEG2RAD(x)                          (x * 0.01745329252)  // *PI/180
 #define RAD2DEG(x)                          (x * 57.2957795131)  // *180/PI
@@ -62,65 +65,7 @@ void updateMotorInfo(int32_t left_rear_tick, int32_t right_rear_tick, int32_t le
 void updateOdometry(void);
 void updateGoalVelocity(void);
 bool calcOdometry(double diff_time);
-void trigger(const std_msgs::String& msg);
-void goForward(int velocity);
-void goBackward(int velocity);
-void goRight(int velocity);
-void goLeft(int velocity);
-void goForwardRight(int velocity);
-void goForwardLet(int velocity);
-void goBackwardRight(int velocity);
-void goBackwardLeft(int velocity);
-void moveRobotTo(int steps_1, int steps_2, int steps_3, int steps_4);
-void stopRobot(void);
 
 void setup_motor(void);
-void main_loop_motor(void);
-
-
-/*******************************************************************************
-* Subscriber
-*******************************************************************************/
-ros::Subscriber<geometry_msgs::Twist> cmd_vel_sub("cmd_vel", commandVelocityCallback);
-ros::Subscriber<std_msgs::String> sub("/stepper_trigger", trigger);
-
-/*******************************************************************************
-* Publisher
-*******************************************************************************/
-nav_msgs::Odometry odom;
-std_msgs::Float32 msg_sensor;
-ros::Publisher odom_pub("odom", &odom);
-ros::Publisher sensor_pub("sensor", &msg_sensor);
-
-
-/*******************************************************************************
-* Calculation for odometry
-*******************************************************************************/
-bool init_encoder = true;
-int32_t last_diff_tick[WHEEL_NUM] = {0, 0, 0, 0};
-double  last_rad[WHEEL_NUM]       = {0.0, 0.0, 0.0, 0.0};
-
-
-/*******************************************************************************
-* Update Joint State
-*******************************************************************************/
-double  last_velocity[WHEEL_NUM]  = {0.0, 0.0, 0.0, 0.0};
-
-
-/*******************************************************************************
-* Declaration for controllers
-*******************************************************************************/
-float goal_velocity[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-float goal_velocity_from_button[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-float goal_velocity_from_cmd[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-float goal_velocity_from_rc100[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-
-
-/*******************************************************************************
-* Declaration for SLAM and navigation
-*******************************************************************************/
-unsigned long prev_update_time;
-float odom_pose[3];
-double odom_vel[3];
 
 #endif

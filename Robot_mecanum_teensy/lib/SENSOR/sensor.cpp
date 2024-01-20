@@ -9,191 +9,133 @@
  */
 
 #include "sensor.h"
+#include "led.h"
 
-NewPing sonars[SONAR_NUM] = {
+
+Ultrasonic sonars[SONAR_NUM] = {
     //sonar1
-    NewPing(TRIGGER_FRONT_RIGHT_SONAR, ECHO_FRONT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_FRONT_RIGHT_SONAR, ECHO_FRONT_RIGHT_SONAR),
     //sonar2
-    NewPing(TRIGGER_FRONT_LEFT_SONAR, ECHO_FRONT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_FRONT_LEFT_SONAR, ECHO_FRONT_LEFT_SONAR),
     //sonar3
-    NewPing(TRIGGER_RIGHT_RIGHT_SONAR, ECHO_RIGHT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_RIGHT_RIGHT_SONAR, ECHO_RIGHT_RIGHT_SONAR),
     //sonar4
-    NewPing(TRIGGER_RIGHT_LEFT_SONAR, ECHO_RIGHT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_RIGHT_LEFT_SONAR, ECHO_RIGHT_LEFT_SONAR),
     //sonar5
-    NewPing(TRIGGER_LEFT_RIGHT_SONAR, ECHO_LEFT_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_LEFT_RIGHT_SONAR, ECHO_LEFT_RIGHT_SONAR),
     //sonar6
-    NewPing(TRIGGER_LEFT_LEFT_SONAR, ECHO_LEFT_LEFT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_LEFT_LEFT_SONAR, ECHO_LEFT_LEFT_SONAR),
     //sonar7
-    NewPing(TRIGGER_BACK_RIGHT_SONAR, ECHO_BACK_RIGHT_SONAR, MAX_DISTANCE),
+    Ultrasonic(TRIGGER_BACK_RIGHT_SONAR, ECHO_BACK_RIGHT_SONAR),
     //sonar8
-    NewPing(TRIGGER_BACK_LEFT_SONAR, ECHO_BACK_LEFT_SONAR, MAX_DISTANCE)
+    Ultrasonic(TRIGGER_BACK_LEFT_SONAR, ECHO_BACK_LEFT_SONAR)
 };
 
-ros::NodeHandle nh;
 
-uint8_t sonar_front_right;
-uint8_t sonar_front_left;
-uint8_t sonar_right_right;
-uint8_t sonar_right_left;
-uint8_t sonar_left_right;
-uint8_t sonar_left_left;
-uint8_t sonar_back_right;
-uint8_t sonar_back_left;
+
+uint8_t front_right;
+uint8_t front_left;
+uint8_t right_right;
+uint8_t right_left;
+uint8_t left_right;
+uint8_t left_left;
+uint8_t back_right;
+uint8_t back_left;
 
 char frameid[] = "/sonar_ranger";
 
 unsigned long pingTimer;
 
-void initRangeMessage(sensor_msgs::Range &range_name){
-    range_name.radiation_type   = sensor_msgs::Range::ULTRASOUND;
-    range_name.header.frame_id  = frameid;
-    range_name.field_of_view    = FIELD_OF_VIEW;
-    range_name.min_range        = MIN_DISTANCE;
-    range_name.max_range        = MAX_DISTANCE/100;
+// TODO: Add timestamp 
+String create_message(uint8_t front_right, uint8_t front_left, 
+                    uint8_t right_right, uint8_t right_left, 
+                    uint8_t left_right, uint8_t left_left, 
+                    uint8_t back_right, uint8_t back_left)
+{
+    String temp = "{";
+    // Message header
+    temp += "\"Header\":";
+    temp += "{";
+    temp += "\"frame_id\":";
+    temp += frameid;
+    temp += ",";
+    temp += "\"field_of_view\":";
+    temp += String(FIELD_OF_VIEW);
+    temp += ",";
+    temp += "\"min_range\":";
+    temp += String(MIN_DISTANCE);
+    temp += ",";
+    temp += "\"max_range\":";
+    temp += String(MAX_DISTANCE/100);
+    // End header object
+    temp += "}";
+    // Sensor data
+    temp += "\"data\":";
+    temp += "{";
+    temp += "\"sonar_1:\"";
+    temp += String(front_right);
+    temp += ",";
+    temp += "\"sonar_2:\"";
+    temp += String(front_left);
+    temp += ",";
+    temp += "\"sonar_3:\"";
+    temp += String(right_right);
+    temp += ",";
+    temp += "\"sonar_4:\"";
+    temp += String(right_left);
+    temp += ",";
+    temp += "\"sonar_5:\"";
+    temp += String(left_right);
+    temp += ",";
+    temp += "\"sonar_6:\"";
+    temp += String(left_left);
+    temp += ",";
+    temp += "\"sonar_7:\"";
+    temp += String(back_right);
+    temp += ",";
+    temp += "\"sonar_8:\"";
+    temp += String(back_left);
+    // End data object
+    temp += "}";
+    // End
+    temp += "}";
+
+    return temp;
 }
 
-void create_message(uint8_t sonar_front_right, uint8_t sonar_front_left, uint8_t sonar_right_right, uint8_t sonar_right_left, uint8_t sonar_left_right, uint8_t sonar_left_left, uint8_t sonar_back_right, uint8_t sonar_back_left){
-    uint8_t json_shaw = {
-        "sonar1": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_front_right,
-        },
-        "sonar2": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_front_left,
-        },
-        "sonar3": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_right_right,
-        },
-        "sonar4": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_right_left,
-        },
-        "sonar5": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_left_right,
-        },
-        "sonar6": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_left_left,
-        },
-        "sonar7": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_back_right,
-        },
-        "sonar8": {
-            "radiation_type": sensor_msgs::Range::ULTRASOUND,
-            "frame_id" : frameid,
-            "field_of_view" : FIELD_OF_VIEW,
-            "min_range" : MIN_DISTANCE,
-            "max_range" : MAX_DISTANCE/100,
-            "range"     : sonar_back_left,
-        },
-        
-    }
-}
-
-void setup_sensor(void){
-    nh.advertise(pub_sonar_front_right);
-    nh.advertise(pub_sonar_front_left);
-    nh.advertise(pub_sonar_right_right);
-    nh.advertise(pub_sonar_right_left);
-    nh.advertise(pub_sonar_left_right);
-    nh.advertise(pub_sonar_left_left);
-    nh.advertise(pub_sonar_back_right);
-    nh.advertise(pub_sonar_back_left);
-
-    initRangeMessage(sonar_front_right);
-    initRangeMessage(sonar_front_left);
-    initRangeMessage(sonar_right_right);
-    initRangeMessage(sonar_right_left);
-    initRangeMessage(sonar_left_right);
-    initRangeMessage(sonar_left_left);
-    initRangeMessage(sonar_back_right);
-    initRangeMessage(sonar_back_left);
-
+void setup_sensor(ros::NodeHandle &nh){
     pingTimer = millis();
 }
 
-void main_loop_sensor(void){
+void main_loop_sensor(ros::Publisher &pub_sonar_data)
+{
+    // setup_sensor();
     if(millis()>=pingTimer){
         // Read From sensors
-        sonar_front_right   = sonars[0].ping_cm(); 
-        sonar_front_left    = sonars[1].ping_cm(); 
-        sonar_right_right   = sonars[2].ping_cm(); 
-        sonar_right_left    = sonars[3].ping_cm(); 
-        sonar_left_right    = sonars[4].ping_cm();
-        sonar_left_left     = sonars[5].ping_cm();
-        sonar_back_right    = sonars[6].ping_cm();
-        sonar_back_left     = sonars[7].ping_cm();
-        String debug_msg    = "readings: sonar_front_right: "+String(sonar_front_right) + " sonar_front_left: "+String(sonar_front_left) + " sonar_right_right: "+String(sonar_right_right) + " sonar_right_left: "+String(sonar_right_left) + " sonar_left_right: "+String(sonar_left_right) + " sonar_left_left: "+String(sonar_left_left) + " sonar_back_right: "+String(sonar_back_right) + " sonar_back_left: "+String(sonar_back_left);
+        front_right   = sonars[0].read(); 
+        front_left    = sonars[1].read(); 
+        right_right   = sonars[2].read(); 
+        right_left    = sonars[3].read(); 
+        left_right    = sonars[4].read();
+        left_left     = sonars[5].read();
+        back_right    = sonars[6].read();
+        back_left     = sonars[7].read();
+
+        for(int i = 0; i < SONAR_NUM; i++){
+            if(sonars[i].read() < 15){
+                Warning_state();
+            }
+        }
         
-        int length          = debug_msg.length();
-        char data_final[length+1];
-        debug_msg.toCharArray(data_final, length + 1);
-        debug.data = data_final;
-        pub_debug.publish(&debug);
+        String debug_msg    = create_message(front_right, front_left, right_right, right_left, left_right, left_left, back_right, back_left);
 
-        // compose the sensor_msgs/Range message
-
-        sonar_front_right   = (float)sonar_front_right/100;
-        sonar_front_left    = (float)sonar_front_left /100;
-        sonar_right_right   = (float)sonar_right_right/100;
-        sonar_right_left    = (float)sonar_right_left /100;
-        sonar_left_right    = (float)sonar_left_right /100;
-        sonar_left_left     = (float)sonar_left_left  /100;
-        sonar_back_right    = (float)sonar_back_right /100;
-        sonar_back_left     = (float)sonar_back_left  /100;
-
-        sonar_front_right.header.stamp  = nh.now();
-        sonar_front_left.header.stamp   = nh.now();
-        sonar_right_right.header.stamp  = nh.now();
-        sonar_right_left.header.stamp   = nh.now();
-        sonar_left_right.header.stamp   = nh.now();
-        sonar_left_left.header.stamp    = nh.now();
-        sonar_back_right.header.stamp   = nh.now();
-        sonar_back_left.header.stamp    = nh.now();
-
-
-        // publish each sonar reading on each topic
-
-        pub_sonar_front_right.publish(&sonar_front_right);
-        pub_sonar_front_left.publish(&sonar_front_left);
-        pub_sonar_right_right.publish(&sonar_right_right);
-        pub_sonar_right_left.publish(&sonar_right_left);
-        pub_sonar_left_right.publish(&sonar_left_right);
-        pub_sonar_left_left.publish(&sonar_left_left);
-        pub_sonar_back_right.publish(&sonar_back_right);
-        pub_sonar_back_left.publish(&sonar_back_left);
+        // Convert debug_msg to std_msgs::String
+        std_msgs::String sonars_msg;
+        sonars_msg.data = debug_msg.c_str();
+        pub_sonar_data.publish(&sonars_msg);
 
         pingTimer = millis() + PING_INTERVAL;
+    }
 }
+
+
