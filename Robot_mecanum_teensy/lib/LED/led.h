@@ -11,9 +11,8 @@
 #ifndef _LED_H_
 #define _LED_H_
 
-#include <Arduino.h>
-#include "TeensyThreads.h"
 #include <Adafruit_NeoPixel.h>
+#include "TeensyThreads.h"
 
 // #define LIGHT_PIN 33
 #define LED_RGB_PIN 33
