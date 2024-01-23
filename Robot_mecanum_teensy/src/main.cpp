@@ -3,7 +3,7 @@
 #include "motor.h"
 #include "TeensyThreads.h"
 #include <sensor_msgs/Range.h>
-#include "std_msgs/Float32.h"
+// #include "std_msgs/Float32.h"
 #include "led.h"
 
 // put function declarations here:
@@ -12,11 +12,11 @@ ros::NodeHandle nh;
 std_msgs::String debug;
 
 // nav_msgs::Odometry odom;
-std_msgs::Float32 msg_sensor;
+// std_msgs::Float32 msg_sensor;
 
 ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
 // ros::Publisher odom_pub("odom", &odom);
-ros::Publisher sensor_pub("sensor", &msg_sensor);
+// ros::Publisher sensor_pub("sensor", &msg_sensor);
 ros::Publisher pub_debug("/debug", &debug);
 
 /* Debugging motor */
