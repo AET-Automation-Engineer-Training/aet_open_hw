@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "sensor.h"
 #include "motor.h"
-#include "TeensyThreads.h"
+// #include "TeensyThreads.h"
 #include <sensor_msgs/Range.h>
 // #include "std_msgs/Float32.h"
 #include "led.h"
@@ -23,10 +23,9 @@ ros::Publisher pub_debug("/debug", &debug);
 // ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("cmd_vel", &commandVelocityCallback);
 
 void setup() {
-  // put your setup code here, to run once:
-  nh.getHardware()->setBaud(57600);
-  // Setup ROS
+  /// Setup ROS
   nh.initNode();
+  nh.getHardware()->setBaud(57600);
 
   // Setup sensor
   setup_sensor(nh);
