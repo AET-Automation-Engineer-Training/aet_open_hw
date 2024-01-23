@@ -23,3 +23,9 @@
 6. Results:
 ![markdown](image-1.png)
 
+## Note before uploading code for teensy:
+- On ubuntu, pls install udev teensy.rules with link: https://www.pjrc.com/teensy/00-teensy.rules
+- Run terminal: sudo cp 00-teensy.rules /etc/udev/rules.d/
+- Run terminal: tar -xvzf teensy_linux64.tar.gz
+- Run terminal: ./teensy &
+

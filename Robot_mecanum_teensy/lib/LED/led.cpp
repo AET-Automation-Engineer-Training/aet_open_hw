@@ -37,11 +37,11 @@ void Warning_state() // Nhay do
     {
         pixels.setPixelColor(i, RGB_RED);
     }
-    threads.delay(300);
+    threads.delay(200);
     pixels.show();
 
     pixels.clear();
-    threads.delay(300);
+    threads.delay(200);
     pixels.show();
 }
 
