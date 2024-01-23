@@ -24,9 +24,7 @@ ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("cmd_vel", &commandVelocityCal
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
   nh.getHardware()->setBaud(57600);
-  
   // Setup ROS
   nh.initNode();
 
