@@ -24,7 +24,7 @@ ros::Publisher pub_debug("/debug", &debug);
 
 void setup() {
   // put your setup code here, to run once:
-  nh.getHardware()->setBaud(9600);
+  nh.getHardware()->setBaud(57600);
   // Setup ROS
   nh.initNode();
 
