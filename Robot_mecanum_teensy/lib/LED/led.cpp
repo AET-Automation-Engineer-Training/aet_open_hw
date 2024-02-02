@@ -19,10 +19,10 @@ Adafruit_NeoPixel pixels(NUMPIXELS, LED_RGB_PIN, NEO_GRB + NEO_KHZ800);
 void main_led(void)
 {
     Init_led();
-    while(1)
-    {
-        Normal_state();
-    }
+    // while(1)
+    // {
+        // Normal_state();
+    // }
 }
 
 void Init_led(void)
@@ -45,6 +45,20 @@ void Warning_state() // Nhay do
     pixels.show();
 }
 
+void Full_state() // Nhay do
+{
+    for (int i = 0; i < NUMPIXELS; i++)
+    {
+        pixels.setPixelColor(i, RGB_GREEN);
+    }
+    threads.delay(200);
+    pixels.show();
+
+    pixels.clear();
+    threads.delay(200);
+    pixels.show();
+}
+
 void Normal_state()
 {
     uint16_t i;
@@ -52,6 +66,11 @@ void Normal_state()
     {
         pixels.setPixelColor(i, Wheel(((i * 256 / NUMPIXELS) + j_in_state) & 255));
     }
+    threads.delay(200);
+    pixels.show();
+
+    pixels.clear();
+    threads.delay(200);
     pixels.show();
     j_in_state = (j_in_state + 1) % (256 * 5);
 }

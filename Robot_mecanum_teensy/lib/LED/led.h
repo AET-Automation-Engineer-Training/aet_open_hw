@@ -15,7 +15,7 @@
 #include "TeensyThreads.h"
 
 // #define LIGHT_PIN 33
-#define LED_RGB_PIN 33
+#define LED_RGB_PIN 19
 
 #define NUMPIXELS 20
 #define BRIGHTNESS 50
@@ -29,6 +29,7 @@
 void main_led(void);
 void Init_led(void);
 void Warning_state();
+void Full_state();
 void Normal_state();
 uint32_t Wheel(byte WheelPos);
 
