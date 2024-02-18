@@ -29,3 +29,7 @@
 - Run terminal: tar -xvzf teensy_linux64.tar.gz
 - Run terminal: ./teensy &
 
+## Debug with teensy:
+- Fail (circuit error and fixing).
+- Replace Mega and debug: install and build ros_lib before running.
+

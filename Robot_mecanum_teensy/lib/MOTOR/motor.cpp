@@ -20,7 +20,7 @@
 #define dir_pin_1               38
 #define step_pin_1              27
 
-#define dir_pin_2               39
+#define dir_pin_2               35
 #define step_pin_2              40
 
 #define dir_pin_3               5
@@ -30,7 +30,7 @@
 #define step_pin_4              2
 
 #define motorInterfaceType      34
-#define enable_shield           35
+#define enable_shield           39
 
 #define STEP_PER_REVOLUTION     200
 
