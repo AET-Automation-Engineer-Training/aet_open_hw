@@ -22,9 +22,9 @@
 
 #define NAME                                "Mecanum"
 
-#define WHEEL_RADIUS                        0.03
-#define WHEEL_SEPARATION_X                  0.1005           // meter 
-#define WHEEL_SEPARATION_Y                  0.085            // meter 
+#define WHEEL_RADIUS                        0.150
+#define WHEEL_SEPARATION_X                  0.6527           // meter 
+#define WHEEL_SEPARATION_Y                  0.392            // meter 
 
 #define WHEEL_GEOMETRY                      (WHEEL_SEPARATION_X + WHEEL_SEPARATION_Y)
 

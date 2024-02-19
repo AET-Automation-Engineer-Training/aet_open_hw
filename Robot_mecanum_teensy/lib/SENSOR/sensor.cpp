@@ -121,13 +121,19 @@ void main_loop_sensor(ros::Publisher &pub_sonar_data)
         back_right    = sonars[6].read();
         back_left     = sonars[7].read();
 
-        for(int i = 0; i < SONAR_NUM; i++){
-            if(sonars[i].read() < 15){
-                Warning_state();
-            }
+
+        if(sonars[0].read() < 15 || sonars[1].read() < 15 || sonars[2].read() < 15 || sonars[3].read() < 15 || sonars[4].read() < 15 || sonars[5].read() < 15 || sonars[6].read() < 15 || sonars[7].read() < 15)
+        {
+            Warning_state();
         }
+        else
+        {
+            Full_state();
+        }
+
         
         String debug_msg    = create_message(front_right, front_left, right_right, right_left, left_right, left_left, back_right, back_left);
+
 
         // Convert debug_msg to std_msgs::String
         std_msgs::String sonars_msg;
