@@ -33,19 +33,22 @@
 #define dir_pin_2               39
 #define step_pin_2              40
 
-#define dir_pin_3               5
-#define step_pin_3              3
+#define dir_pin_3               22
+#define step_pin_3              23
 
-#define dir_pin_4               4
-#define step_pin_4              2
+#define dir_pin_4               24
+#define step_pin_4              25
 
-#define enable_shield           35
+#define enable_1                35
 #define enable_2                36
+#define enable_3                37
+#define enable_4                34
+
 #define motorInterfaceType      1
 
 #define STEP_PER_REVOLUTION     200
 
-const int MOTOR_SPEED = 60;
+const int MOTOR_SPEED = 1500;
 
 int wheel_front_left_step_2   = 0;
 int wheel_front_right_step_2  = 0;
@@ -81,18 +84,23 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     double angular_z            = cmd_vel_msg.angular.z;
 
     /* Debug */
-    double wheel_left_velocity  = linear_x - (WHEEL_GEOMETRY / 2) * angular_z;
-    double wheel_right_velocity = linear_x + (WHEEL_GEOMETRY / 2) * angular_z;
+    // double wheel_left_velocity  = linear_x - (WHEEL_GEOMETRY / 2) * angular_z;
+    // double wheel_right_velocity = linear_x + (WHEEL_GEOMETRY / 2) * angular_z;
 
-    double wheel_front_left_2   = (wheel_left_velocity + wheel_right_velocity) / 2;
-    double wheel_front_right_2  = (wheel_left_velocity + wheel_right_velocity) / 2;
-    double wheel_back_left_2    = (wheel_left_velocity - wheel_right_velocity) / 2;
-    double wheel_back_right_2   = (wheel_left_velocity - wheel_right_velocity) / 2;
+    double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_front_right_1  = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_back_left_1    = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_back_right_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    
+    // double wheel_front_left_2   = (wheel_left_velocity + wheel_right_velocity) / 2;
+    // double wheel_front_right_2  = (wheel_left_velocity + wheel_right_velocity) / 2;
+    // double wheel_back_left_2    = (wheel_left_velocity - wheel_right_velocity) / 2;
+    // double wheel_back_right_2   = (wheel_left_velocity - wheel_right_velocity) / 2;
 
-    wheel_front_left_step_2     = wheel_front_left_2  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_front_right_step_2    = wheel_front_right_2 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_back_left_step_2      = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_back_right_step_2     = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_front_left_step_2   = wheel_front_left_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_front_right_step_2  = wheel_front_right_1 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_back_left_step_2    = wheel_back_left_1   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_back_right_step_2   = wheel_back_right_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
 
     motor_right_front_1.setSpeed(wheel_front_right_step_2);
     motor_left_front_1.setSpeed(wheel_front_left_step_2);
@@ -122,19 +130,25 @@ void setup() {
    nh.advertise(pub_sonar_data);
    nh.advertise(pub_debug);
 
-   pinMode(enable_shield, OUTPUT);
-   digitalWrite(enable_shield, LOW);
+   pinMode(enable_1, OUTPUT);
+   digitalWrite(enable_1, LOW);
 
    pinMode(enable_2, OUTPUT);
    digitalWrite(enable_2, LOW);
 
+   pinMode(enable_3, OUTPUT);
+   digitalWrite(enable_3, LOW);
+
+   pinMode(enable_4, OUTPUT);
+   digitalWrite(enable_4, LOW);
+
   // // Subscriber configuration
    nh.subscribe(sub_cmd_vel);
 
-   motor_right_front_1.setMaxSpeed(1000);
-   motor_left_front_1.setMaxSpeed(1000);
-   motor_right_back_1.setMaxSpeed(1000);
-   motor_left_back_1.setMaxSpeed(1000);
+   motor_right_front_1.setMaxSpeed(MOTOR_SPEED);
+   motor_left_front_1.setMaxSpeed(MOTOR_SPEED);
+   motor_right_back_1.setMaxSpeed(MOTOR_SPEED);
+   motor_left_back_1.setMaxSpeed(MOTOR_SPEED);
 
 void loop() {
 
