@@ -76,9 +76,9 @@ ros::Publisher pub_debug("/debug", &debug_2);
 void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
 
     /* Step lib */
-    double linear_x                     = cmd_vel_msg.linear.x;
-    double linear_y                     = cmd_vel_msg.linear.y;
-    double angular_z                    = cmd_vel_msg.angular.z;
+    double linear_x             = cmd_vel_msg.linear.x;
+    double linear_y             = cmd_vel_msg.linear.y;
+    double angular_z            = cmd_vel_msg.angular.z;
 
     /* Debug */
     double wheel_left_velocity  = linear_x - (WHEEL_GEOMETRY / 2) * angular_z;
@@ -89,13 +89,15 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     double wheel_back_left_2    = (wheel_left_velocity - wheel_right_velocity) / 2;
     double wheel_back_right_2   = (wheel_left_velocity - wheel_right_velocity) / 2;
 
-    wheel_front_left_step_2   = wheel_front_left_2  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_front_right_step_2  = wheel_front_right_2 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_back_left_step_2    = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
-    wheel_back_right_step_2   = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_front_left_step_2     = wheel_front_left_2  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_front_right_step_2    = wheel_front_right_2 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_back_left_step_2      = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+    wheel_back_right_step_2     = wheel_back_left_2   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
 
     motor_right_front_1.setSpeed(wheel_front_right_step_2);
     motor_left_front_1.setSpeed(wheel_front_left_step_2);
+    motor_right_back_1.setSpeed(wheel_back_right_step_2);
+    motor_left_back_1.setSpeed(wheel_back_left_step_2);
 
 
     String debug_msg = String(wheel_front_right_step_2);
@@ -130,22 +132,20 @@ void setup() {
    nh.subscribe(sub_cmd_vel);
 
    motor_right_front_1.setMaxSpeed(1000);
-   
    motor_left_front_1.setMaxSpeed(1000);
+   motor_right_back_1.setMaxSpeed(1000);
+   motor_left_back_1.setMaxSpeed(1000);
 
 void loop() {
-  // put your main code here, to run repeatedly:
-//  main_loop_sensor(pub_sonar_data);
-//  pub_debug.publish(&debug_2);
 
+  // put your main code here, to run repeatedly:
+  main_loop_sensor(pub_sonar_data);
+  pub_debug.publish(&debug_2);
   motor_right_front_1.runSpeed();
   motor_left_front_1.runSpeed();
-//  motor_right_back_1.step(wheel_back_right_step_2);
-//  motor_left_back_1.step(wheel_back_left_step_2);
+  motor_right_back_1.runSpeed();
+  motor_left_back_1.runSpeed();
   
-  nh.spinOnce();
-//  delay(1);
-//
-  
+  nh.spinOnce(); 
   
 }

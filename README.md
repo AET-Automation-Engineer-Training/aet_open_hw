@@ -1,6 +1,6 @@
 # ate_open_hw
 ## Hardware:
-- Teensy 4.1
+- Teensy 4.1 or Mega 2560
 - Step Motor
 - Sonar
 - Led
@@ -31,5 +31,5 @@
 
 ## Debug with teensy:
 - Fail (circuit error and fixing).
-- Replace Mega and debug: install and build ros_lib before running.
+- Replace Mega and debug: install and build ros_lib before running. With link: http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
 
