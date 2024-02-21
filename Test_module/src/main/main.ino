@@ -86,9 +86,9 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     /* Debug */
    
     double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-    double wheel_front_right_1  = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_front_right_1  = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
     double wheel_back_left_1    = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-    double wheel_back_right_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_back_right_1   = (linear_x - linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
 
     wheel_front_left_step_2   = wheel_front_left_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
     wheel_front_right_step_2  = wheel_front_right_1 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
