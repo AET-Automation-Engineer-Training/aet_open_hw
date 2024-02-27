@@ -27,22 +27,22 @@
 #define MIN_LINEAR_VELOCITY                 -MAX_LINEAR_VELOCITY  
 #define MIN_ANGULAR_VELOCITY                -MAX_ANGULAR_VELOCITY 
 
-#define dir_pin_1               38
-#define step_pin_1              27
+#define dir_pin_1               23
+#define step_pin_1              22
 
-#define dir_pin_2               39
-#define step_pin_2              40
+#define dir_pin_2               26
+#define step_pin_2              25
 
-#define dir_pin_3               22
-#define step_pin_3              23
+#define dir_pin_3               29
+#define step_pin_3              28
 
-#define dir_pin_4               24
-#define step_pin_4              25
+#define dir_pin_4               32
+#define step_pin_4              31
 
-#define enable_1                35
-#define enable_2                36
-#define enable_3                37
-#define enable_4                34
+#define enable_1                24
+#define enable_2                27
+#define enable_3                30
+#define enable_4                33
 
 #define motorInterfaceType      1
 
@@ -143,11 +143,13 @@ void setup() {
    motor_right_back_1.setMaxSpeed(MOTOR_SPEED);
    motor_left_back_1.setMaxSpeed(MOTOR_SPEED);
 
+}
+
 void loop() {
 
   // put your main code here, to run repeatedly:
-  main_loop_sensor(pub_sonar_data);
-  pub_debug.publish(&debug_2);
+//  main_loop_sensor(pub_sonar_data);
+//  pub_debug.publish(&debug_2);
   motor_right_front_1.runSpeed();
   motor_left_front_1.runSpeed();
   motor_right_back_1.runSpeed();
