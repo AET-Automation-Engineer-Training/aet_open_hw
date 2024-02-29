@@ -17,11 +17,11 @@
 * Define pin number of step motor
 *******************************************************************************/
 
-#define dir_pin_1               38
-#define step_pin_1              27
+#define dir_pin_1               39
+#define step_pin_1              38
 
 #define dir_pin_2               35
-#define step_pin_2              40
+#define step_pin_2              36
 
 #define dir_pin_3               5
 #define step_pin_3              3
@@ -29,8 +29,8 @@
 #define dir_pin_4               4
 #define step_pin_4              2
 
-#define motorInterfaceType      34
-#define enable_shield           39
+#define motorInterfaceType      1
+#define enable_shield           40 
 
 #define STEP_PER_REVOLUTION     200
 
@@ -54,10 +54,15 @@ double linearVelocityX;
 double linearVelocityY;
 double angularVelocityZ;
 
-Stepper motor_right_front_1(STEP_PER_REVOLUTION, step_pin_1, dir_pin_1);
-Stepper motor_left_front_1(STEP_PER_REVOLUTION,  step_pin_2, dir_pin_2);
-Stepper motor_right_back_1(STEP_PER_REVOLUTION,  step_pin_3, dir_pin_3);
-Stepper motor_left_back_1 (STEP_PER_REVOLUTION,  step_pin_4, dir_pin_4);
+// Stepper motor_right_front_1(STEP_PER_REVOLUTION, step_pin_1, dir_pin_1);
+// Stepper motor_left_front_1(STEP_PER_REVOLUTION,  step_pin_2, dir_pin_2);
+// Stepper motor_right_back_1(STEP_PER_REVOLUTION,  step_pin_3, dir_pin_3);
+// Stepper motor_left_back_1 (STEP_PER_REVOLUTION,  step_pin_4, dir_pin_4);
+
+// AccelStepper motor_right_front_1(motorInterfaceType, step_pin_1, dir_pin_1);
+// AccelStepper motor_left_front_1(motorInterfaceType,  step_pin_2, dir_pin_2);
+// AccelStepper motor_right_back_1(motorInterfaceType,  step_pin_3, dir_pin_3);
+// AccelStepper motor_left_back_1 (motorInterfaceType,  step_pin_4, dir_pin_4);
 
 
 void setup_motor(){
@@ -68,10 +73,10 @@ void setup_motor(){
     Serial.begin(9600);
 
     /* Step lib */
-    motor_right_front_1.setSpeed(MAX_SPEED);
-    motor_left_front_1.setSpeed(MAX_SPEED);
-    motor_right_back_1.setSpeed(MAX_SPEED);
-    motor_left_back_1.setSpeed(MAX_SPEED); 
+//     motor_right_front_1.setMaxSpeed(MAX_SPEED);
+//     motor_left_front_1.setMaxSpeed(MAX_SPEED);
+//     motor_right_back_1.setMaxSpeed(MAX_SPEED);
+//     motor_left_back_1.setMaxSpeed(MAX_SPEED); 
 }
 
 // void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
