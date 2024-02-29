@@ -105,7 +105,7 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
 }
 
 /* Debugging motor */
-ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("/cmd_vel", &commandVelocityCallback);
+// ros::Subscriber<geometry_msgs::Twist> sub_cmd_vel("/cmd_vel", &commandVelocityCallback);
 
 void setup() {
   /// Setup ROS
@@ -133,7 +133,7 @@ void setup() {
   nh.advertise(pub_debug);
 
   // Subscriber configuration
-  nh.subscribe(sub_cmd_vel);
+  // nh.subscribe(sub_cmd_vel);
 
 }
 
