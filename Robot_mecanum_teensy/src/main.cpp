@@ -17,8 +17,6 @@ std_msgs::String debug_2;
 nav_msgs::Odometry odom;
 std_msgs::Float32 msg_sensor;
 
-
-
 ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
 ros::Publisher odom_pub("odom", &odom);
 ros::Publisher sensor_pub("sensor", &msg_sensor);
@@ -122,6 +120,12 @@ void setup() {
   motor_left_front_1.setMaxSpeed(MAX_SPEED);
   motor_right_back_1.setMaxSpeed(MAX_SPEED);
   motor_left_back_1.setMaxSpeed(MAX_SPEED); 
+
+  motor_right_front_1.setSpeed(100);
+  motor_left_front_1.setSpeed(100);
+  motor_right_back_1.setSpeed(100);
+  motor_left_back_1.setSpeed(100);
+    
   // threads.addThread(main_led);
   
   // Publisher configuration
@@ -135,13 +139,13 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  main_loop_sensor(pub_sonar_data);
+  // main_loop_sensor(pub_sonar_data);
   // pub_debug.publish(&debug_2);
   motor_right_front_1.runSpeed();
   motor_left_front_1.runSpeed();
   motor_right_back_1.runSpeed();
   motor_left_back_1.runSpeed();
-  threads.yield();
-  nh.spinOnce();
+  // threads.yield();
+  // nh.spinOnce();
   
 }
