@@ -71,7 +71,7 @@ std_msgs::String debug_2;
 //nav_msgs::Odometry odom;
 //std_msgs::Float32 msg_sensor;
 
-ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
+// ros::Publisher pub_sonar_data(TOPIC_SONAR_DATA, &debug);
 //ros::Publisher odom_pub("odom", &odom);
 //ros::Publisher sensor_pub("sensor", &msg_sensor);
 ros::Publisher pub_debug("/debug", &debug_2);
@@ -120,7 +120,7 @@ void setup() {
   nh.initNode();
   
   // // Publisher configuration
-   nh.advertise(pub_sonar_data);
+  //  nh.advertise(pub_sonar_data);
    nh.advertise(pub_debug);
 
    pinMode(enable_1, OUTPUT);
