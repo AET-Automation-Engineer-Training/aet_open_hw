@@ -52,53 +52,51 @@ String create_message(uint8_t front_right, uint8_t front_left,
                     uint8_t left_right, uint8_t left_left, 
                     uint8_t back_right, uint8_t back_left)
 {
-    String temp = "{";
-    // Message header
-    temp += "\"Header\":";
-    temp += "{";
-    temp += "\"frame_id\":";
-    temp += frameid;
-    temp += ",";
-    temp += "\"field_of_view\":";
-    temp += String(FIELD_OF_VIEW);
-    temp += ",";
-    temp += "\"min_range\":";
-    temp += String(MIN_DISTANCE);
-    temp += ",";
-    temp += "\"max_range\":";
-    temp += String(MAX_DISTANCE/100);
-    // End header object
-    temp += "}";
-    // Sensor data
-    temp += "\"data\":";
-    temp += "{";
-    temp += "\"sonar_1:\"";
-    temp += String(front_right);
-    temp += ",";
-    temp += "\"sonar_2:\"";
-    temp += String(front_left);
-    temp += ",";
-    temp += "\"sonar_3:\"";
-    temp += String(right_right);
-    temp += ",";
-    temp += "\"sonar_4:\"";
-    temp += String(right_left);
-    temp += ",";
-    temp += "\"sonar_5:\"";
-    temp += String(left_right);
-    temp += ",";
-    temp += "\"sonar_6:\"";
-    temp += String(left_left);
-    temp += ",";
-    temp += "\"sonar_7:\"";
-    temp += String(back_right);
-    temp += ",";
-    temp += "\"sonar_8:\"";
-    temp += String(back_left);
-    // End data object
-    temp += "}";
-    // End
-    temp += "}";
+    // String temp = "{";
+    // // Sensor data
+    // temp += "\"sonar_1\":";
+    // temp += "\"";
+    // temp += String(front_right);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_2\":";
+    // temp += "\"";
+    // temp += String(front_left);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_3:\":";
+    // temp += "\"";
+    // temp += String(right_right);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_4\":";
+    // temp += "\"";
+    // temp += String(right_left);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_5\":";
+    // temp += "\"";
+    // temp += String(left_right);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_6\":";
+    // temp += "\"";
+    // temp += String(left_left);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_7\":";
+    // temp += "\"";
+    // temp += String(back_right);
+    // temp += "\"";
+    // temp += ",";
+    // temp += "\"sonar_8\":";
+    // temp += "\"";
+    // temp += String(back_left);
+    // temp += "\"";
+    // // End data object
+    // temp += "}";
+    // // End
+    String temp = String(front_right) + ":" + String(front_left)+ ":"+String(right_right)+ ":"+String(right_left)+ ":"+String(left_right)+ ":"+String(left_left)+ ":"+String(back_right)+ ":"+String(back_left);
 
     return temp;
 }

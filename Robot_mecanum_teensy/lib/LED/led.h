@@ -14,10 +14,9 @@
 #include <Adafruit_NeoPixel.h>
 #include "TeensyThreads.h"
 
-// #define LIGHT_PIN 33
 #define LED_RGB_PIN 19
 
-#define NUMPIXELS 20
+#define NUMPIXELS 21
 #define BRIGHTNESS 50
 
 #define RGB_RED pixels.Color(255, 0, 0)
