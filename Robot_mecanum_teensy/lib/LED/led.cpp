@@ -59,6 +59,34 @@ void Full_state() // Nhay do
     pixels.show();
 }
 
+void Blink_state()
+{
+    // uint16_t i;
+    // for (i = 0; i < pixels.numPixels(); i++)
+    // {
+    //     pixels.setPixelColor(i, Wheel(((i * 256 / NUMPIXELS) + j_in_state) & 255));
+    // }
+    // threads.delay(200);
+    // pixels.show();
+
+    // pixels.clear();
+    // threads.delay(200);
+    // pixels.show();
+    // j_in_state = (j_in_state + 1) % (256 * 5);
+    // uint16_t i;
+    // for (i = 0; i < pixels.numPixels(); i++)
+    // {
+    //     pixels.setPixelColor(i, Wheel(((i * 256 / NUMPIXELS) + j_in_state) & 255));
+    // }
+    // pixels.show();
+    // j_in_state = (j_in_state + 1) % (256 * 5);
+    for (int i = 0; i < NUMPIXELS; i++)
+    {
+        pixels.setPixelColor(i, pixels.Color(random(0, 255), random(0, 255), random(0, 255)));
+        pixels.show();
+    }
+}
+
 void Normal_state()
 {
     uint16_t i;
@@ -73,6 +101,7 @@ void Normal_state()
     threads.delay(200);
     pixels.show();
     j_in_state = (j_in_state + 1) % (256 * 5);
+    
 }
 
 uint32_t Wheel(byte WheelPos)

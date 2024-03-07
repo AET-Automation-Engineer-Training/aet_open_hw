@@ -30,6 +30,7 @@ void Init_led(void);
 void Warning_state();
 void Full_state();
 void Normal_state();
+void Blink_state();
 uint32_t Wheel(byte WheelPos);
 
 #endif

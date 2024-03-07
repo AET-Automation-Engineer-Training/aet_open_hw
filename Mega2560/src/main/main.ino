@@ -27,11 +27,11 @@
 #define MIN_LINEAR_VELOCITY                 -MAX_LINEAR_VELOCITY  
 #define MIN_ANGULAR_VELOCITY                -MAX_ANGULAR_VELOCITY 
 
-#define dir_pin_1               23
-#define step_pin_1              22
+#define dir_pin_2               23
+#define step_pin_2              22
 
-#define dir_pin_2               26
-#define step_pin_2              25
+#define dir_pin_1               26
+#define step_pin_1              25
 
 #define dir_pin_3               29
 #define step_pin_3              28
@@ -46,7 +46,7 @@
 
 #define motorInterfaceType      1
 
-#define STEP_PER_REVOLUTION     400
+#define STEP_PER_REVOLUTION     2500
 
 const int MOTOR_SPEED = 1500;
 
@@ -56,10 +56,10 @@ int wheel_back_left_step_2    = 0;
 int wheel_back_right_step_2   = 0;
 
 
-AccelStepper motor_right_front_1(motorInterfaceType, step_pin_1, dir_pin_1);
-AccelStepper motor_left_front_1(motorInterfaceType,  step_pin_2, dir_pin_2);
-AccelStepper motor_right_back_1(motorInterfaceType,  step_pin_3, dir_pin_3);
-AccelStepper motor_left_back_1 (motorInterfaceType,  step_pin_4, dir_pin_4);
+AccelStepper motor_right_front_1(motorInterfaceType, step_pin_1, dir_pin_1); //22 23
+AccelStepper motor_left_front_1(motorInterfaceType,  step_pin_2, dir_pin_2); //25 26
+AccelStepper motor_right_back_1(motorInterfaceType,  step_pin_3, dir_pin_3); //28 29
+AccelStepper motor_left_back_1 (motorInterfaceType,  step_pin_4, dir_pin_4); //31 32
 
 
 // put function declarations here:
@@ -85,6 +85,11 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
 
     /* Debug */
    
+//    double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+//    double wheel_front_right_1  = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+//    double wheel_back_left_1    = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
+//    double wheel_back_right_1   = (linear_x - linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
+
     double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
     double wheel_front_right_1  = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
     double wheel_back_left_1    = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
