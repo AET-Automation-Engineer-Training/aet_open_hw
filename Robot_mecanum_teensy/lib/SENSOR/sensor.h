@@ -42,7 +42,7 @@
 #define TRIGGER_FRONT_LEFT_SONAR    31           //sonar2
 #define ECHO_FRONT_LEFT_SONAR       16
 
-#define TRIGGER_RIGHT_RIGHT_SONAR   32           //sonar3
+#define TRIGGER_RIGHT_RIGHT_SONAR   22           //sonar3
 #define ECHO_RIGHT_RIGHT_SONAR      26
 
 #define TRIGGER_RIGHT_LEFT_SONAR    6            //sonar4
