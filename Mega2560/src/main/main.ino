@@ -84,17 +84,16 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     double angular_z            = cmd_vel_msg.angular.z;
 
     /* Debug */
-   
+
+    double wheel_back_right_1     = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_front_left_1     = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_back_left_1      = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
+    double wheel_front_right_1    = (linear_x - linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
 //    double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-//    double wheel_front_right_1  = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-//    double wheel_back_left_1    = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
+//    double wheel_front_right_1  = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
+//    double wheel_back_left_1    = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
 //    double wheel_back_right_1   = (linear_x - linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
-
-    double wheel_front_left_1   = (linear_x - linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-    double wheel_front_right_1  = (linear_x + linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
-    double wheel_back_left_1    = (linear_x + linear_y -(WHEEL_GEOMETRY / 2) * angular_z);
-    double wheel_back_right_1   = (linear_x - linear_y +(WHEEL_GEOMETRY / 2) * angular_z);
-
+    
     wheel_front_left_step_2   = wheel_front_left_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
     wheel_front_right_step_2  = wheel_front_right_1 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
     wheel_back_left_step_2    = wheel_back_left_1   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
@@ -105,8 +104,22 @@ void commandVelocityCallback(const geometry_msgs::Twist& cmd_vel_msg){
     motor_right_back_1.setSpeed(wheel_back_right_step_2);
     motor_left_back_1.setSpeed(wheel_back_left_step_2);
 
-
-    String debug_msg = String(wheel_front_right_step_2);
+//    double wheel_front_left_1   = (linear_x - linear_y - angular_z * WHEEL_GEOMETRY)/WHEEL_RADIUS;
+//    double wheel_front_right_1  = (linear_x + linear_y + angular_z * WHEEL_GEOMETRY)/WHEEL_RADIUS;
+//    double wheel_back_left_1    = (linear_x + linear_y - angular_z * WHEEL_GEOMETRY)/WHEEL_RADIUS;
+//    double wheel_back_right_1   = (linear_x - linear_y + angular_z * WHEEL_GEOMETRY)/WHEEL_RADIUS;
+//
+//    wheel_front_left_step_2   = wheel_front_left_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+//    wheel_front_right_step_2  = wheel_front_right_1 * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+//    wheel_back_left_step_2    = wheel_back_left_1   * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+//    wheel_back_right_step_2   = wheel_back_right_1  * STEP_PER_REVOLUTION / (2 * PI * WHEEL_RADIUS);
+//
+//    motor_right_front_1.setSpeed(wheel_front_right_step_2);
+//    motor_left_front_1.setSpeed(wheel_front_left_step_2);
+//    motor_right_back_1.setSpeed(wheel_back_right_step_2);
+//    motor_left_back_1.setSpeed(wheel_back_left_step_2);
+    
+    String debug_msg = String(wheel_front_left_step_2) + ":" + String(wheel_front_right_step_2) + ":" + String(wheel_back_left_step_2) + ":" + String(wheel_back_right_step_2);
   
     debug_2.data = debug_msg.c_str();
 
