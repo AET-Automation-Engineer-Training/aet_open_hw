@@ -46,7 +46,7 @@
 
 #define motorInterfaceType      1
 
-#define STEP_PER_REVOLUTION     2500
+#define STEP_PER_REVOLUTION     1500
 
 const int MOTOR_SPEED = 1500;
 
