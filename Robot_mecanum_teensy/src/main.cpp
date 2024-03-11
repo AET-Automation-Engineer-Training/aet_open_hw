@@ -130,7 +130,7 @@ void setup() {
   
   // Publisher configuration
   nh.advertise(pub_sonar_data);
-  nh.advertise(pub_debug);
+  // nh.advertise(pub_debug);
 
   // Subscriber configuration
   // nh.subscribe(sub_cmd_vel);

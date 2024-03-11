@@ -120,13 +120,13 @@ void main_loop_sensor(ros::Publisher &pub_sonar_data)
         back_left     = sonars[7].read();
 
 
-        if(sonars[0].read() < 7 || sonars[1].read() < 7 || sonars[2].read() < 7 || sonars[3].read() < 7 || sonars[4].read() < 7 || sonars[5].read() < 7 || sonars[6].read() < 7 || sonars[7].read() < 7)
+        if(sonars[0].read() < 30 || sonars[1].read() < 30 || sonars[2].read() < 30 || sonars[3].read() < 30 || sonars[4].read() < 30 || sonars[5].read() < 30 || sonars[6].read() < 30 || sonars[7].read() < 30)
         {
             Warning_state();
         }
         else
         {
-            Blink_state();
+            // nothing to do
         }
 
         
