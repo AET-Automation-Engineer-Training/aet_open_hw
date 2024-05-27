@@ -48,7 +48,7 @@
 
 #define STEP_PER_REVOLUTION     1500
 
-const int MOTOR_SPEED = 1500;
+const int MOTOR_SPEED = 2500;
 
 int wheel_front_left_step_2   = 0;
 int wheel_front_right_step_2  = 0;
